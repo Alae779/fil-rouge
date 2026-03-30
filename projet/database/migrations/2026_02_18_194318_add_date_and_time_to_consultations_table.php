@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'client']);
+        Schema::table('consultations', function (Blueprint $table) {
+            $table->date('date');
+            $table->time('time');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            
+        Schema::table('consultations', function (Blueprint $table) {
+            $table->dropColumn(['consultation_date', 'consultation_time']);
         });
     }
 };
