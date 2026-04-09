@@ -17,7 +17,7 @@ class AdminMiddleware
     {
         $user = $request->user();
         if(!$user || $user->role !== 'admin'){
-            return redirect('/');
+            abort(403, 'Unauthorized');
         }
         return $next($request);
     }

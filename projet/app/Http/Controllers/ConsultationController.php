@@ -32,12 +32,13 @@ class ConsultationController extends Controller
     public function update($id){
         $consultation = Consultation::findOrFail($id);
         $consultation->update(request()->all());
-        return redirect()->route('admin.consultations');
+        $consultations = Consultation::all();
+        return view('admin.consultation', compact('consultations'));
     }
     public function delete($id){
         $consultation = Consultation::destroy($id);
         $consultations = Consultation::all();
-        return view('consultation', compact('consultations'));
+        return view('admin.consultation', compact('consultations'));
     }
     public function reserver($id){
         $consultation = Consultation::find($id);
@@ -51,5 +52,12 @@ class ConsultationController extends Controller
             'patient_id' => Auth::id(),
             'consultation_id' => $consultation->id
         ]);
+        return redirect()->back();
+    }
+    public function specify(Request $request){
+        $query = Consultation::query();
+        $query->where('name', 'like', '%' . $request->search . '%');
+        $consultations = $query->paginate(10)->withQueryString();
+        return view('consultation', compact('consultations'));
     }
 }

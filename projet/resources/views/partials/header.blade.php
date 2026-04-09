@@ -62,17 +62,21 @@
             @auth
             @if(Auth::user()->role == 'admin')
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('appointments*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('admin_consultations') }}">Consultations</a>
-            @endauth
             @else
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Consultations*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('consultations') }}">Consultations</a>
             @endif
+            @else
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Consultations*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('consultations') }}">Consultations</a>
+            @endauth
+
+
             @auth
             @if(Auth::user()->role == 'admin')
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Appointments*') ? 'text-primary font-semibold' : '' }}" href="{{ route('admin_appointment') }}">Appointments</a>
-            @endauth
             @else
-            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Appointments*') ? 'text-primary font-semibold' : '' }}" href="{{ url('/Appointments') }}">My Appointments</a>
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Appointments*') ? 'text-primary font-semibold' : '' }}" href="{{ route('appointments') }}">My Appointments</a>
             @endif
+            @endauth
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('records*') ? 'text-primary font-semibold' : '' }}" href="{{ url('/records') }}">Records</a>
         </nav>
 
@@ -86,7 +90,7 @@
                     <span class="material-symbols-outlined text-primary">account_circle</span>
                 </div>
                 @auth
-                    <a href="{{ route('register_form') }}" class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-sm">
+                    <a href="{{ route('logout') }}" class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-sm">
                         <span class="truncate">Log Out</span>
                     </a>
                 @endauth

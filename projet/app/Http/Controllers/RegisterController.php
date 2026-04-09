@@ -22,5 +22,6 @@ class RegisterController extends Controller
             'password' => $request->password,
             'role' => 'client'
         ]);
+        return view('auth.login');
     }
 }

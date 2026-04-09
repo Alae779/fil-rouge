@@ -9,20 +9,17 @@
             <h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Available Consultations</h1>
             <p class="text-slate-500 dark:text-slate-400 text-base">Book your next medical appointment with our certified specialists.</p>
         </div>
-        <div class="flex gap-2">
-            <button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50">
-                <span class="material-symbols-outlined text-sm">filter_list</span>
-                Filter
-            </button>
-            <button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50">
-                <span class="material-symbols-outlined text-sm">sort</span>
-                Sort
-            </button>
-        </div>
+        <form method="GET" action="{{ route('specify') }}" class="flex items-center gap-3">
+                    <!-- Search -->
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search patient..." class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 focus:ring-primary focus:border-primary"/>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+                        Search
+                    </button>
+        </form>
     </div>
 
     <!-- Specialties Chips -->
-    <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
+    <!-- <div class="flex gap-3 mb-8 overflow-x-auto pb-2">
         <button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary px-4 text-white text-sm font-semibold">
             All Specialties
         </button>
@@ -41,7 +38,7 @@
         <button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 text-slate-700 dark:text-slate-300 text-sm font-medium hover:border-primary transition-all">
             Orthopedics
         </button>
-    </div>
+    </div> -->
 
     <!-- Grid Layout of Consultations -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -72,9 +69,12 @@
                             <span class="material-symbols-outlined text-sm text-primary">alarm</span>{{$consultation->time}}
                         </div>
                     </div>
+                    @auth
                     <a href="{{ route('reserver', $consultation->id) }}" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
                         Book Now <span class="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
+                    @else
+                    @endauth
                 </div>
             </div>
         </div>
