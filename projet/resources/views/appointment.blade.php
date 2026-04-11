@@ -121,6 +121,33 @@
                                 </span>
                             @endif
                         </td>
+                        <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            @if($rdv->statut === 'pending')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span>
+                                    Pending
+                                </span>
+                                <!-- Cancel Button -->
+                                <form method="POST" action="{{ route('cancel_my_appointment', $rdv->id) }}" class="inline">
+                                    @csrf
+                                    <button type="submit" class="px-2.5 py-1 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors" title="Cancel" onclick="return confirm('Are you sure you want to cancel this appointment?')">
+                                        Cancel
+                                    </button>
+                                </form>
+                            @elseif($rdv->statut === 'accepted')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                                    Accepted
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
+                                    Cancelled
+                                </span>
+                            @endif
+                        </div>
+                    </td>
                     </tr>
                     @empty
                     <tr>

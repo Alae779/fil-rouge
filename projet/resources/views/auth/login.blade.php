@@ -21,12 +21,6 @@
                 <p class="text-slate-500 dark:text-slate-400 text-sm">Enter your credentials to access your dashboard.</p>
             </div>
 
-            <!-- Role Selector Tabs -->
-            <div class="flex p-1 bg-background-light dark:bg-slate-800 rounded-lg mb-6">
-                <button class="flex-1 py-2 text-sm font-semibold rounded-md bg-white dark:bg-slate-700 text-primary shadow-sm">Patient</button>
-                <button class="flex-1 py-2 text-sm font-semibold rounded-md text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">Administrator</button>
-            </div>
-
             <form class="space-y-5" method="POST" action="{{ route('login') }}">
                 @csrf
 
@@ -38,6 +32,9 @@
                     </label>
                     <input class="form-input w-full rounded-lg text-[#111318] dark:text-white border border-[#dbdfe6] dark:border-slate-700 bg-white dark:bg-slate-800 focus:border-primary focus:ring-2 focus:ring-primary/20 h-12 px-4 text-base transition-all placeholder:text-slate-400"
                         placeholder="e.g. name@hospital.com" type="email" name="email" value="{{ old('email') }}" required autofocus/>
+                        @error('email')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                 </div>
 
                 <!-- Password Field -->

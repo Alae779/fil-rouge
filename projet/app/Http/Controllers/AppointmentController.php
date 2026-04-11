@@ -38,4 +38,12 @@ class AppointmentController extends Controller
 
         return view('admin.appointment', compact('appointment'));
     }
+    public function cancel_my_appointment($id){
+        $rdv = Rendezvous::findOrFail($id);
+        if ($rdv->patient_id !== Auth::id()) {
+            return redirect()->back()->with('error', 'Unauthorized');
+        }
+        $rdv->delete();
+        return redirect()->back();
+    }
 }

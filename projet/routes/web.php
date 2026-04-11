@@ -21,6 +21,7 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name(('logout'));
 Route::get('/consultations', [ConsultationController::class, 'show'])->name('consultations');
 Route::get('/consultations/book/{id}', [ConsultationController::class, 'reserver'])->name('reserver');
 Route::post('/consultations/book/{consultation}', [ConsultationController::class, 'confirm'])->name('confirm');
+Route::post('/appointments/cancel/{id}', [AppointmentController::class, 'cancel_my_appointment'])->name('cancel_my_appointment');
 
 Route::middleware(['\App\Http\Middleware\AdminMiddleware'])->group(function () {
     Route::get('/admin/appointments', [AppointmentController::class, 'admin_show'])->name('admin_appointment');
