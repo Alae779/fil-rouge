@@ -48,8 +48,8 @@
                 <!-- Filter by Status -->
                 <form method="GET" action="{{ route('filter') }}" class="flex items-center gap-3">
                     <select name="statut" onchange="this.form.submit()" class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 focus:ring-primary focus:border-primary">
-                        <option value="">All Status</option>
                         <option value="pending" {{ request('statut') == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="">All Status</option>
                         <option value="accepted" {{ request('statut') == 'accepted' ? 'selected' : '' }}>Accepted</option>
                         <option value="cancelled" {{ request('statut') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
@@ -75,7 +75,6 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
                     @forelse($appointment as $rdv)
-                    @if($rdv->statut === 'pending')
                     <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/80 transition-colors">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
@@ -98,44 +97,59 @@
                             {{ \Carbon\Carbon::parse($rdv->heure)->format('H:i') }}
                         </td>
                         <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span>
-                                Pending
-                            </span>
+                            @if($rdv->statut === 'pending')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5"></span>
+                                    Pending
+                                </span>
+                            @elseif($rdv->statut === 'accepted')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                                    Accepted
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
+                                    Cancelled
+                                </span>
+                            @endif
                         </td>
                         <td class="px-6 py-4 text-right sticky right-0 bg-white dark:bg-gray-900">
                             <div class="flex items-center justify-end gap-2">
-                                <!-- Accept Button -->
-                                <form method="POST" action="{{ route('accept_appointment', $rdv->id) }}" class="inline">
-                                    @csrf
-                                    <button type="submit" class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1" title="Accept">
-                                        <span class="material-symbols-outlined text-sm">check_circle</span>
-                                        Accept
-                                    </button>
-                                </form>
-                                
-                                <!-- Cancel Button -->
-                                <form method="POST" action="{{ route('cancel_appointment', $rdv->id) }}" class="inline">
-                                    @csrf
-                                    <button type="submit" class="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1" title="Cancel">
-                                        <span class="material-symbols-outlined text-sm">cancel</span>
-                                        Decline
-                                    </button>
-                                </form>
+                                @if($rdv->statut === 'pending')
+                                    <!-- Accept Button -->
+                                    <form method="POST" action="{{ route('accept_appointment', $rdv->id) }}" class="inline">
+                                        @csrf
+                                        <button type="submit" class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1" title="Accept">
+                                            <span class="material-symbols-outlined text-sm">check_circle</span>
+                                            Accept
+                                        </button>
+                                    </form>
+                                    
+                                    <!-- Cancel Button -->
+                                    <form method="POST" action="{{ route('cancel_appointment', $rdv->id) }}" class="inline">
+                                        @csrf
+                                        <button type="submit" class="px-3 py-1.5 bg-red-500 hover:bg-red-600 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1" title="Cancel">
+                                            <span class="material-symbols-outlined text-sm">cancel</span>
+                                            Decline
+                                        </button>
+                                    </form>
+                                @else
+                                    <span class="text-xs text-gray-400 italic">No actions available</span>
+                                @endif
                             </div>
                         </td>
                     </tr>
-                    @endif
-                @empty
-                <tr>
-                    <td colspan="6" class="px-6 py-12 text-center">
-                        <div class="flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-6xl text-gray-300 mb-3">event_busy</span>
-                            <p class="text-gray-500 font-medium">No appointments found</p>
-                        </div>
-                    </td>
-                </tr>
-                @endforelse
+                    @empty
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <span class="material-symbols-outlined text-6xl text-gray-300 mb-3">event_busy</span>
+                                <p class="text-gray-500 font-medium">No appointments found</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

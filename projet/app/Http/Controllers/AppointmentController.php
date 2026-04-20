@@ -9,8 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
-    public function admin_show(){
+    public function admin_show(Request $request){
         $appointment = Rendezvous::paginate(15);
+        $query = Rendezvous::query();
+        $status = $request->get('statut', "pending");
+        if($status){
+            $query->where('statut', $status);
+            $appointment = $query->paginate(10)->withQueryString();
+        }
         return view('admin.appointment', compact('appointment'));
     }
     public function show(){
@@ -26,7 +32,7 @@ class AppointmentController extends Controller
     }
     public function cancel($id){
         $appointment = Rendezvous::findOrFail($id);
-        $appointment->update(['statut' => 'cancelled']);
+        $appointment->update(['statut' => 'rejected']);
         return redirect()->back();
     }
     public function filter(Request $request){
@@ -43,7 +49,7 @@ class AppointmentController extends Controller
         if ($rdv->patient_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Unauthorized');
         }
-        $rdv->delete();
+        $rdv->update(['statut' => 'cancelled']);
         return redirect()->back();
     }
 }

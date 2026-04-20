@@ -73,11 +73,11 @@
             @auth
             @if(Auth::user()->role == 'admin')
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Appointments*') ? 'text-primary font-semibold' : '' }}" href="{{ route('admin_appointment') }}">Appointments</a>
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('records*') ? 'text-primary font-semibold' : '' }}" href="{{ route('users') }}">Users</a>
             @else
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Appointments*') ? 'text-primary font-semibold' : '' }}" href="{{ route('appointments') }}">My Appointments</a>
             @endif
             @endauth
-            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('records*') ? 'text-primary font-semibold' : '' }}" href="{{ url('/records') }}">Records</a>
         </nav>
 
         <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 hidden md:block"></div>

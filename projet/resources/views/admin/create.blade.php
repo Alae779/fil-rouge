@@ -106,7 +106,7 @@
                 {{-- Price --}}
                 <div>
                     <label for="price" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
-                        Price ($) <span class="text-red-500">*</span>
+                        Price (DH) <span class="text-red-500">*</span>
                     </label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">

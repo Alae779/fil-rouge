@@ -37,8 +37,8 @@
             <p class="text-2xl font-black text-green-500">{{ $appointments->where('statut', 'accepted')->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Cancelled</p>
-            <p class="text-2xl font-black text-red-500">{{ $appointments->where('statut', 'cancelled')->count() }}</p>
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Rejected</p>
+            <p class="text-2xl font-black text-red-500">{{ $appointments->where('statut', 'rejected')->count() }}</p>
         </div>
     </div>
 
@@ -114,6 +114,11 @@
                                     <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
                                     Accepted
                                 </span>
+                            @elseif($rdv->statut === 'rejected')
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
+                                    Rejected
+                                </span>
                             @else
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
                                     <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
@@ -135,16 +140,6 @@
                                         Cancel
                                     </button>
                                 </form>
-                            @elseif($rdv->statut === 'accepted')
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
-                                    Accepted
-                                </span>
-                            @else
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
-                                    Cancelled
-                                </span>
                             @endif
                         </div>
                     </td>

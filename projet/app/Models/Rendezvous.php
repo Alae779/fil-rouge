@@ -8,7 +8,6 @@ class Rendezvous extends Model
 {
     protected $table = 'rendezvous';
     protected $fillable = ['date', 'heure', 'statut', 'patient_id', 'consultation_id'];
-    protected $guarded = ['id'];
     public $timestamps = false;
 
     public function patient()
