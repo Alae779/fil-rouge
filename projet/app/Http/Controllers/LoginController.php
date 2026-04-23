@@ -15,6 +15,8 @@ class LoginController extends Controller
         $email = $request->email;
         $password = $request->password;
         $credentials = ["email" => $email, "password" => $password];
+
+        // 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             return redirect('/');

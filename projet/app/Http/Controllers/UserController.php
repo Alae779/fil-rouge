@@ -13,6 +13,9 @@ class UserController extends Controller
     }
     public function ban($id){
         $user = User::findOrFail($id);
+        if($user->role === 'admin'){
+            abort(403, 'Forbidden');
+        }
         $user->update(['is_banned' => 'banned']);
         return redirect()->back();
     }
@@ -20,5 +23,11 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->update(['is_banned' => 'active']);
         return redirect()->back();
+    }
+    public function search(Request $request){
+        $query = User::query();
+        $query->where('name', 'like', '%' . $request->search . '%');
+        $users = $query->paginate(10)->withQueryString();
+        return view('admin.users', compact('users'));
     }
 }

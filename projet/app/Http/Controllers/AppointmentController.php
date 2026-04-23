@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AppointmentController extends Controller
 {
     public function admin_show(Request $request){
-        $appointment = Rendezvous::paginate(15);
+        $appointment = Rendezvous::paginate(10);
         $query = Rendezvous::query();
         $status = $request->get('statut', "pending");
         if($status){
@@ -40,9 +40,14 @@ class AppointmentController extends Controller
         if($request->filled('statut')){
             $query->where('statut', $request->statut);
         }
-        $appointment = $query->paginate(10)->withQueryString();
+        $appointments = $query->paginate(10)->withQueryString();
 
-        return view('admin.appointment', compact('appointment'));
+        $userID = Auth::id();
+        $user = User::find(Auth::id());
+        if($user->role === 'admin'){
+            return view('admin.appointment', compact('appointments'));
+        }
+        return view('appointment', compact('appointments'));
     }
     public function cancel_my_appointment($id){
         $rdv = Rendezvous::findOrFail($id);

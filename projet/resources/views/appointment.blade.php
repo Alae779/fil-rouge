@@ -48,7 +48,7 @@
         <div class="p-4 border-b border-gray-100 dark:border-gray-800 flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <!-- Filter by Status -->
-                <form method="GET" action="" class="flex items-center gap-3">
+                <form method="GET" action="{{ route('filter') }}" class="flex items-center gap-3">
                     <select name="statut" onchange="this.form.submit()" class="px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 focus:ring-primary focus:border-primary">
                         <option value="">All Status</option>
                         <option value="pending" {{ request('statut') == 'pending' ? 'selected' : '' }}>Pending</option>
@@ -162,10 +162,10 @@
             </table>
         </div>
 
-        <!-- Pagination -->
-        <div class="p-6 border-t border-gray-100 dark:border-gray-800">
-            {{ $appointments->links() }}
-        </div>
+    </div>
+    <!-- Pagination -->
+    <div class="p-6 border-t border-gray-100 dark:border-gray-800">
+        {{ $appointments->links() }}
     </div>
 </main>
 

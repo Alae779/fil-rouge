@@ -29,19 +29,11 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total Consultations</p>
-            <p class="text-2xl font-black text-gray-900 dark:text-white">1,284</p>
-        </div>
-        <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Active Today</p>
-            <p class="text-2xl font-black text-primary">42</p>
+            <p class="text-2xl font-black text-gray-900 dark:text-white">{{ $cons->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Average Price</p>
-            <p class="text-2xl font-black text-gray-900 dark:text-white">$85.00</p>
-        </div>
-        <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Pending Sync</p>
-            <p class="text-2xl font-black text-amber-500">3</p>
+            <p class="text-2xl font-black text-gray-900 dark:text-white">{{number_format($averagePrice), 2}}</p>
         </div>
     </div>
 
@@ -110,19 +102,7 @@
 
         <!-- Pagination -->
         <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-center">
-            <nav class="flex items-center gap-1">
-                <button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
-                    <span class="material-symbols-outlined">chevron_left</span>
-                </button>
-                <button class="w-10 h-10 rounded-lg bg-primary text-white text-sm font-bold">1</button>
-                <button class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 text-sm font-medium transition-colors">2</button>
-                <button class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 text-sm font-medium transition-colors">3</button>
-                <span class="mx-2 text-gray-400 text-sm">...</span>
-                <button class="w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 text-sm font-medium transition-colors">15</button>
-                <button class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
-                    <span class="material-symbols-outlined">chevron_right</span>
-                </button>
-            </nav>
+            {{ $consultations->links() }}
         </div>
     </div>
 </main>

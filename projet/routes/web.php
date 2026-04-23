@@ -8,6 +8,8 @@ use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+USE App\Http\Middleware\AdminMiddleware;
+USE App\Http\Middleware\ActiveMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,31 +20,17 @@ Route::get('/register', [RegisterController::class, 'RegisterForm'])->name('regi
 Route::post('/register/register', [RegisterController::class, 'Register'])->name('register');
 Route::post('/login/login', [LoginController::class, 'Login'])->name(('login'));
 Route::get('/logout', [LogoutController::class, 'logout'])->name(('logout'));
-
 Route::get('/consultations', [ConsultationController::class, 'show'])->name('consultations');
-Route::middleware(['\App\Http\Middleware\AdminMiddleware'])->group(function () {
+Route::get('/appointments/filter', [AppointmentController::class, 'filter'])->name('filter');
+
+Route::middleware([ActiveMiddleware::class])->group(function () {
     Route::get('/consultations/book/{id}', [ConsultationController::class, 'reserver'])->name('reserver');
     Route::post('/consultations/book/{consultation}', [ConsultationController::class, 'confirm'])->name('confirm');
+    Route::get('/consultations/book/success/{consultation}', [ConsultationController::class, 'bookingSuccess'])->name('booking_success');
     Route::post('/appointments/cancel/{id}', [AppointmentController::class, 'cancel_my_appointment'])->name('cancel_my_appointment');
 });
+include "web/admin.php";
 
-Route::middleware(['\App\Http\Middleware\AdminMiddleware'])->group(function () {
-    Route::get('/admin/appointments', [AppointmentController::class, 'admin_show'])->name('admin_appointment');
-    Route::post('/admin/appointments/accept/{id}', [AppointmentController::class, 'accept'])->name('accept_appointment');
-    Route::post('/admin/appointments/cancel/{id}', [AppointmentController::class, 'cancel'])->name('cancel_appointment');
-    Route::get('/admin/consultations', [ConsultationController::class, 'admin_show'])->name('admin_consultations');
-    Route::get('/admin/consultations/create', [ConsultationController::class, 'create'])->name('create_consultation');
-    Route::post('/admin/consultations/store', [ConsultationController::class, 'store'])->name('store_consultation');
-    Route::get('/admin/consultations/edit/{id}', [ConsultationController::class, 'edit'])->name('edit_consultation');
-    Route::post('/admin/consultations/delete/{id}', [ConsultationController::class, 'delete'])->name('delete_consultation');
-    Route::post('/admin/consultations/update/{id}', [ConsultationController::class, 'update'])->name('update_consultation');
-    Route::get('/appointments/filter', [AppointmentController::class, 'filter'])->name('filter');
-    Route::get('/users', [UserController::class, 'show'])->name('users');
-    Route::get('/users/search', [UserController::class, 'search'])->name('users_search');
-    Route::post('/users/ban/{id}', [UserController::class, 'ban'])->name('ban_user');
-    Route::post('/users/unban/{id}', [UserController::class, 'unban'])->name('unban_user');
-
-});
 Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
 Route::get('/appointments/specify', [ConsultationController::class, 'specify'])->name('specify');
 

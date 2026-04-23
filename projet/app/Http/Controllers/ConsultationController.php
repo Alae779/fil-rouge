@@ -6,24 +6,26 @@ use App\Models\Consultation;
 use App\Models\Rendezvous;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use PhpParser\Node\Const_;
 
 class ConsultationController extends Controller
 {
     public function show(){
-        $consultations = Consultation::all();
+        $consultations = Consultation::paginate(9);
         return view('consultation', compact('consultations'));
     }
     public function admin_show(){
-        $consultations = Consultation::all();
-        return view('admin.consultation', compact('consultations'));
+        $consultations = Consultation::paginate(10);
+        $cons = Consultation::all();
+        $averagePrice = Consultation::avg('price');
+        return view('admin.consultation', compact('cons', 'consultations', 'averagePrice'));
     }
-    public function create(){
+    public function create(){   
         return view('admin.create');
     }
     public function store(Request $request){
         Consultation::create($request->all());
-        return redirect('/');
+        $consultations = Consultation::all();
+        return redirect()->back();
     }
     public function edit($id){
         $consultation = Consultation::findOrFail($id);
@@ -52,7 +54,10 @@ class ConsultationController extends Controller
             'patient_id' => Auth::id(),
             'consultation_id' => $consultation->id
         ]);
-        return redirect()->back();
+        return redirect()->route('booking_success', $consultation->id);
+    }
+    public function bookingSuccess(Consultation $consultation){
+        return view('bookingsuccess', compact('consultation'));
     }
     public function specify(Request $request){
         $query = Consultation::query();

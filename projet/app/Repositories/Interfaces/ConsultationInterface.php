@@ -2,7 +2,7 @@
 namespace App\Repositories\Interfaces;
 use Illuminate\Http\Request;
 
-interface ConsultationInterface
+interface ConsultationInterface // DI
 {
     public function show();
     public function find($id);

@@ -16,7 +16,7 @@ class ActiveMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-        if($user->is_banned !== 'banned'){
+        if($user->is_banned === 'banned'){
             abort(403, 'Unauthorized');
         }
         return $next($request);

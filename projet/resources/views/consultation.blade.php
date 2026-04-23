@@ -82,21 +82,9 @@
     </div>
 
     <!-- Pagination -->
-    <div class="flex items-center justify-center mt-12 mb-8">
-        <nav class="flex items-center gap-1">
-            <a class="flex size-10 items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
-                <span class="material-symbols-outlined">chevron_left</span>
-            </a>
-            <a class="text-sm font-bold flex size-10 items-center justify-center text-white rounded-lg bg-primary" href="#">1</a>
-            <a class="text-sm font-medium flex size-10 items-center justify-center text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="#">2</a>
-            <a class="text-sm font-medium flex size-10 items-center justify-center text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="#">3</a>
-            <span class="text-sm font-medium flex size-10 items-center justify-center text-slate-400">...</span>
-            <a class="text-sm font-medium flex size-10 items-center justify-center text-slate-600 dark:text-slate-400 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="#">12</a>
-            <a class="flex size-10 items-center justify-center text-slate-400 hover:text-primary transition-colors" href="#">
-                <span class="material-symbols-outlined">chevron_right</span>
-            </a>
-        </nav>
-    </div>
+        <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-center">
+            {{ $consultations->links() }}
+        </div>
 </main>
 
 @include('partials.footer')
