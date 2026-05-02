@@ -24,19 +24,19 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total Appointments</p>
-            <p class="text-2xl font-black text-gray-900 dark:text-white">{{ $appointment->count() }}</p>
+            <p class="text-2xl font-black text-gray-900 dark:text-white">{{ $appointments->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Pending</p>
-            <p class="text-2xl font-black text-amber-500">{{ $appointment->where('statut', 'pending')->count() }}</p>
+            <p class="text-2xl font-black text-amber-500">{{ $appointments->where('statut', 'pending')->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Accepted</p>
-            <p class="text-2xl font-black text-green-500">{{ $appointment->where('statut', 'accepted')->count() }}</p>
+            <p class="text-2xl font-black text-green-500">{{ $appointments->where('statut', 'accepted')->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Cancelled</p>
-            <p class="text-2xl font-black text-red-500">{{ $appointment->where('statut', 'cancelled')->count() }}</p>
+            <p class="text-2xl font-black text-red-500">{{ $appointments->where('statut', 'cancelled')->count() }}</p>
         </div>
     </div>
 
@@ -56,7 +56,7 @@
                 </form>
             </div>
             <div class="text-sm text-gray-500">
-                Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $appointment->firstItem() ?? 0 }}-{{ $appointment->lastItem() ?? 0 }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $appointment->total() }}</span> appointments
+                Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $appointments->firstItem() ?? 0 }}-{{ $appointments->lastItem() ?? 0 }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $appointments->total() }}</span> appointments
             </div>
         </div>
 
@@ -66,7 +66,7 @@
                 <thead>
                     <tr class="bg-gray-50/50 dark:bg-gray-800/50">
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Patient Name</th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Consultation Type</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Speciality</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Time</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
@@ -74,7 +74,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                    @forelse($appointment as $rdv)
+                    @forelse($appointments as $rdv)
                     <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/80 transition-colors">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
@@ -88,7 +88,7 @@
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <span class="font-medium text-gray-900 dark:text-white">{{ $rdv->consultation->nom }}</span>
+                            <span class="font-medium text-gray-900 dark:text-white">{{ $rdv->speciality->nom }}</span>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">
                             {{ \Carbon\Carbon::parse($rdv->date)->format('d M Y') }}
@@ -156,7 +156,7 @@
 
         <!-- Pagination -->
         <div class="p-6 border-t border-gray-100 dark:border-gray-800">
-            {{ $appointment->links() }}
+            {{ $appointments->links() }}
         </div>
     </div>
 </main>

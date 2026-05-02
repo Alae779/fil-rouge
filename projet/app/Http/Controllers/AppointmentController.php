@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rendezvous;
+use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
@@ -15,9 +17,9 @@ class AppointmentController extends Controller
         $status = $request->get('statut', "pending");
         if($status){
             $query->where('statut', $status);
-            $appointment = $query->paginate(10)->withQueryString();
+            $appointments = $query->paginate(10)->withQueryString();
         }
-        return view('admin.appointment', compact('appointment'));
+        return view('admin.appointment', compact('appointments'));
     }
     public function show(){
         $userID = Auth::id();
@@ -26,9 +28,23 @@ class AppointmentController extends Controller
         return view('appointment', compact('appointments'));
     }
     public function accept($id){
-        $appointment = Rendezvous::findOrFail($id);
-        $appointment->update(['statut' => 'accepted']);
-        return redirect()->back();
+        DB::beginTransaction();
+        
+        try{
+            $appointment = Rendezvous::findOrFail($id);
+            $appointment->update(['statut' => 'accepted']);
+            Payment::create([
+                'amount' => $appointment->speciality->price,
+                'patient_id' => $appointment->patient_id,
+                'speciality_id' => $appointment->speciality_id,
+                'rendezvous_id' => $appointment->id,
+                ]);
+            DB::commit();
+            return redirect()->back();
+        }catch( \Exception $e){
+            DB::rollBack();
+            return back()->with('error', $e->getMessage());
+        }
     }
     public function cancel($id){
         $appointment = Rendezvous::findOrFail($id);

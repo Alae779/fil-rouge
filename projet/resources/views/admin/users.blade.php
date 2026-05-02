@@ -28,11 +28,11 @@
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Active</p>
-            <p class="text-2xl font-black text-green-500">{{ $users->where('is_banned', "active")->count() }}</p>
+            <p class="text-2xl font-black text-green-500">{{ $users->where('is_banned', "0")->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Banned</p>
-            <p class="text-2xl font-black text-red-500">{{ $users->where('is_banned', "banned")->count() }}</p>
+            <p class="text-2xl font-black text-red-500">{{ $users->where('is_banned', "1")->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Admins</p>
@@ -108,7 +108,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            @if($user->is_banned === 'banned')
+                            @if($user->is_banned === 1)
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
                                     <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1.5"></span>
                                     Banned
@@ -126,13 +126,13 @@
                         <td class="px-6 py-4 text-right sticky right-0 bg-white dark:bg-gray-900">
                             <div class="flex items-center justify-end gap-2">
                                 @if($user->role !== 'admin')
-                                    @if($user->is_banned === 'banned')
+                                    @if($user->is_banned == 1)
                                         <!-- Unban Button -->
                                         <form method="POST" action="{{ route('unban_user', $user->id) }}" class="inline">
                                             @csrf
                                             <button type="submit" class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-xs font-medium rounded-lg transition-colors flex items-center gap-1" title="Unban User">
                                                 <span class="material-symbols-outlined text-sm">check_circle</span>
-                                                Unban
+                                                Unban   
                                             </button>
                                         </form>
                                     @else

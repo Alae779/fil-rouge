@@ -61,12 +61,12 @@
             <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('/') ? 'text-primary font-semibold' : '' }}" href="{{ url('/') }}">Home</a>
             @auth
             @if(Auth::user()->role == 'admin')
-            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('appointments*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('admin_consultations') }}">Consultations</a>
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('appointments*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('admin_specialities') }}">Specialities</a>
             @else
-            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Consultations*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('consultations') }}">Consultations</a>
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Specialities*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('specialities') }}">Specialities</a>
             @endif
             @else
-            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Consultations*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('consultations') }}">Consultations</a>
+            <a class="text-[#111318] dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors {{ request()->is('Specialities*') ? 'text-primary font-semibold border-b-2 border-primary pb-1' : '' }}" href="{{ route('specialities') }}">Specialities</a>
             @endauth
 
 

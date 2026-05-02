@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Route;
 USE App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\ConsultationController;
+use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\UserController;
 
@@ -13,12 +13,12 @@ Route::middleware([AdminMiddleware::class])->group(function () {
             Route::post('/accept/{id}', [AppointmentController::class, 'accept'])->name('accept_appointment');
             Route::post('/cancel/{id}', [AppointmentController::class, 'cancel'])->name('cancel_appointment');
         });
-        Route::get('/consultations', [ConsultationController::class, 'admin_show'])->name('admin_consultations');
-        Route::get('/consultations/create', [ConsultationController::class, 'create'])->name('create_consultation');
-        Route::post('/consultations/store', [ConsultationController::class, 'store'])->name('store_consultation');
-        Route::get('/consultations/edit/{id}', [ConsultationController::class, 'edit'])->name('edit_consultation');
-        Route::post('/consultations/delete/{id}', [ConsultationController::class, 'delete'])->name('delete_consultation');
-        Route::post('/consultations/update/{id}', [ConsultationController::class, 'update'])->name('update_consultation');
+        Route::get('/specialities', [SpecialityController::class, 'admin_show'])->name('admin_specialities');
+        Route::get('/specialities/create', [SpecialityController::class, 'create'])->name('create_speciality');
+        Route::post('/specialities/store', [SpecialityController::class, 'store'])->name('store_speciality');
+        Route::get('/specialities/edit/{id}', [SpecialityController::class, 'edit'])->name('edit_speciality');
+        Route::post('/specialities/delete/{id}', [SpecialityController::class, 'delete'])->name('delete_speciality');
+        Route::post('/specialities/update/{id}', [SpecialityController::class, 'update'])->name('update_speciality');
     });
     Route::prefix('/users')->group(function () {
     Route::get('/', [UserController::class, 'show'])->name('users');

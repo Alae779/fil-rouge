@@ -1,4 +1,4 @@
-@section('title', 'Consultations Listing - MediSlot')
+@section('title', 'Specialities Listing - MediSlot')
 
 @include('partials.header')
 
@@ -6,7 +6,7 @@
     <!-- Title and Filter Section -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div class="flex flex-col gap-1">
-            <h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Available Consultations</h1>
+            <h1 class="text-slate-900 dark:text-white text-3xl font-black tracking-tight">Available Specialities</h1>
             <p class="text-slate-500 dark:text-slate-400 text-base">Book your next medical appointment with our certified specialists.</p>
         </div>
         <form method="GET" action="{{ route('specify') }}" class="flex items-center gap-3">
@@ -40,10 +40,10 @@
         </button>
     </div> -->
 
-    <!-- Grid Layout of Consultations -->
+    <!-- Grid Layout of Specialities -->
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <!-- Consultation Card 1 -->
-         @foreach($consultations as $consultation)
+        <!-- Speciality Card 1 -->
+         @foreach($specialities as $speciality)
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-col hover:shadow-lg transition-shadow group">
             <div class="relative h-48 w-full">
                 <div class="absolute inset-0 bg-center bg-cover transition-transform duration-500 group-hover:scale-105"
@@ -53,24 +53,24 @@
             </div>
             <div class="p-6 flex flex-col flex-1">
                 <div class="flex justify-between items-start mb-2">
-                    <h3 class="text-slate-900 dark:text-white text-lg font-bold">{{$consultation->name}}</h3>
-                    <span class="text-primary font-bold text-lg leading-none">${{$consultation->price}}</span>
+                    <h3 class="text-slate-900 dark:text-white text-lg font-bold">{{$speciality->name}}</h3>
+                    <span class="text-primary font-bold text-lg leading-none">${{$speciality->price}}</span>
                 </div>
-                <p class="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">{{$consultation->descriprtion}}</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-2">{{$speciality->descriprtion}}</p>
                 <div class="mt-auto space-y-3">
                     <div class="flex flex-wrap gap-y-2 gap-x-4">
                         <div class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 text-xs font-medium">
-                            <span class="material-symbols-outlined text-sm text-primary">schedule</span>{{$consultation->duree}} mins
+                            <span class="material-symbols-outlined text-sm text-primary">schedule</span>{{$speciality->duree}} mins
                         </div>
                         <div class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 text-xs font-medium">
-                            <span class="material-symbols-outlined text-sm text-primary">calendar_today</span>{{$consultation->date}}
+                            <span class="material-symbols-outlined text-sm text-primary">calendar_today</span>{{$speciality->date}}
                         </div>
                         <div class="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 text-xs font-medium">
-                            <span class="material-symbols-outlined text-sm text-primary">alarm</span>{{$consultation->time}}
+                            <span class="material-symbols-outlined text-sm text-primary">alarm</span>{{$speciality->time}}
                         </div>
                     </div>
                     @auth
-                    <a href="{{ route('reserver', $consultation->id) }}" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+                    <a href="{{ route('reserver', $speciality->id) }}" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
                         Book Now <span class="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
                     @else
@@ -83,7 +83,7 @@
 
     <!-- Pagination -->
         <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-center">
-            {{ $consultations->links() }}
+            {{ $specialities->links() }}
         </div>
 </main>
 

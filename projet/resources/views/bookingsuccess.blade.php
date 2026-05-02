@@ -21,8 +21,8 @@
                     <div class="flex items-start gap-3">
                         <span class="material-symbols-outlined text-primary mt-1">medical_services</span>
                         <div>
-                            <p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Consultation</p>
-                            <p class="text-gray-900 dark:text-white font-semibold">{{ $consultation->name }}</p>
+                            <p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Speciality</p>
+                            <p class="text-gray-900 dark:text-white font-semibold">{{ $speciality->name }}</p>
                         </div>
                     </div>
 
@@ -30,7 +30,7 @@
                         <span class="material-symbols-outlined text-primary mt-1">calendar_today</span>
                         <div>
                             <p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Date</p>
-                            <p class="text-gray-900 dark:text-white font-semibold">{{ \Carbon\Carbon::parse($consultation->date)->format('l, F d, Y') }}</p>
+                            <p class="text-gray-900 dark:text-white font-semibold">{{ \Carbon\Carbon::parse($speciality->date)->format('l, F d, Y') }}</p>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                         <span class="material-symbols-outlined text-primary mt-1">schedule</span>
                         <div>
                             <p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Time</p>
-                            <p class="text-gray-900 dark:text-white font-semibold">{{ \Carbon\Carbon::parse($consultation->time)->format('h:i A') }}</p>
+                            <p class="text-gray-900 dark:text-white font-semibold">{{ \Carbon\Carbon::parse($speciality->time)->format('h:i A') }}</p>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                         <span class="material-symbols-outlined text-primary mt-1">timer</span>
                         <div>
                             <p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Duration</p>
-                            <p class="text-gray-900 dark:text-white font-semibold">{{ $consultation->duree }} minutes</p>
+                            <p class="text-gray-900 dark:text-white font-semibold">{{ $speciality->duree }} minutes</p>
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                         <span class="material-symbols-outlined">event</span>
                         View My Appointments
                     </a>
-                    <a href="{{ route('consultations') }}" class="w-full border-2 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all">
+                    <a href="{{ route('specialities') }}" class="w-full border-2 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all">
                         <span class="material-symbols-outlined">add</span>
                         Book Another Appointment
                     </a>

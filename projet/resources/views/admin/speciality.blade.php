@@ -1,4 +1,4 @@
-@section('title', 'Admin Consultation Management | MediSlot')
+@section('title', 'Admin Speciality Management | MediSlot')
 
 @include('partials.header')
 
@@ -10,26 +10,26 @@
         <span class="material-symbols-outlined text-xs">chevron_right</span>
         <a class="hover:text-primary transition-colors" href="{{ url('/admin/dashboard') }}">Admin</a>
         <span class="material-symbols-outlined text-xs">chevron_right</span>
-        <span class="text-gray-900 dark:text-gray-300 font-medium">Consultations</span>
+        <span class="text-gray-900 dark:text-gray-300 font-medium">Specialities</span>
     </nav>
 
     <!-- Page Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
-            <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-2">Consultation Management</h1>
-            <p class="text-gray-500 dark:text-gray-400">Manage, edit, and track all medical consultation slots across your facility.</p>
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-2">Speciality Management</h1>
+            <p class="text-gray-500 dark:text-gray-400">Manage, edit, and track all medical speciality slots across your facility.</p>
         </div>
-        <a href="{{ route('create_consultation') }}" class="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all shadow-sm">
+        <a href="{{ route('create_speciality') }}" class="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all shadow-sm">
             <span class="material-symbols-outlined">add</span>
-            Add New Consultation
+            Add New Speciality
         </a>
     </div>
 
     <!-- Stats -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total Consultations</p>
-            <p class="text-2xl font-black text-gray-900 dark:text-white">{{ $cons->count() }}</p>
+            <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Total specialities</p>
+            <p class="text-2xl font-black text-gray-900 dark:text-white">{{ $specs->count() }}</p>
         </div>
         <div class="bg-white dark:bg-gray-900 p-5 rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
             <p class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Average Price</p>
@@ -50,7 +50,7 @@
                 </button>
             </div>
             <div class="text-sm text-gray-500">
-                Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">150</span> consultations
+                Showing <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of <span class="font-semibold text-gray-900 dark:text-white">150</span> specialities
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider w-12">
                             <input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
                         </th>
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider min-w-[200px]">Consultation Name</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider min-w-[200px]">Speciality Name</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider min-w-[280px]">Description</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Duration</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Price</th>
@@ -73,23 +73,23 @@
                 </thead>
                 <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
 
-                    @foreach($consultations as $consultation)
+                    @foreach($specialities as $speciality)
                     <tr class="hover:bg-gray-50/80 dark:hover:bg-gray-800/80 transition-colors">
                         <td class="px-6 py-4"><input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/></td>
-                        <td class="px-6 py-4"><span class="font-semibold text-gray-900 dark:text-white">{{ $consultation->name }}</span></td>
-                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{{ $consultation->description }}</td>
+                        <td class="px-6 py-4"><span class="font-semibold text-gray-900 dark:text-white">{{ $speciality->name }}</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{{ $speciality->description }}</td>
                         <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">{{ $consultation->duree }}</span>
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">{{ $speciality->duree }}</span>
                         </td>
-                        <td class="px-6 py-4 font-mono text-sm text-gray-900 dark:text-white">{{ $consultation->price }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $consultation->date }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $consultation->time }}</td>
+                        <td class="px-6 py-4 font-mono text-sm text-gray-900 dark:text-white">{{ $speciality->price }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $speciality->date }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">{{ $speciality->time }}</td>
                         <td class="px-6 py-4 text-right sticky right-0 bg-white dark:bg-gray-900">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('edit_consultation', $consultation->id) }}" class="p-1.5 text-gray-400 hover:text-primary transition-colors" title="Edit">
+                                <a href="{{ route('edit_speciality', $speciality->id) }}" class="p-1.5 text-gray-400 hover:text-primary transition-colors" title="Edit">
                                     <span class="material-symbols-outlined text-lg">edit</span>
                                 </a>
-                                <a href="{{ route('delete_consultation', $consultation->id) }}" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" title="Delete">
+                                <a href="{{ route('delete_speciality', $speciality->id) }}" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" title="Delete">
                                     <span class="material-symbols-outlined text-lg">delete</span>
                                 </a>
                             </div>
@@ -102,7 +102,7 @@
 
         <!-- Pagination -->
         <div class="p-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-center">
-            {{ $consultations->links() }}
+            {{ $specialities->links() }}
         </div>
     </div>
 </main>

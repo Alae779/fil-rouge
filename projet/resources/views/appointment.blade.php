@@ -16,7 +16,7 @@
             <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-2">My Appointments</h1>
             <p class="text-gray-500 dark:text-gray-400">View and track all your medical appointments.</p>
         </div>
-        <a href="{{ route('consultations') }}" class="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all shadow-sm">
+        <a href="{{ route('specialities') }}" class="bg-primary hover:bg-primary/90 text-white font-bold py-2.5 px-5 rounded-lg flex items-center gap-2 transition-all shadow-sm">
             <span class="material-symbols-outlined">add</span>
             Book New Appointment
         </a>
@@ -67,7 +67,7 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-gray-50/50 dark:bg-gray-800/50">
-                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Consultation Type</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Speciality</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Time</th>
                         <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Duration</th>
@@ -84,8 +84,8 @@
                                     <span class="material-symbols-outlined text-primary">medical_services</span>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-gray-900 dark:text-white">{{ $rdv->consultation->name }}</p>
-                                    <p class="text-xs text-gray-500">{{ $rdv->consultation->description }}</p>
+                                    <p class="font-semibold text-gray-900 dark:text-white">{{ $rdv->speciality->name }}</p>
+                                    <p class="text-xs text-gray-500">{{ $rdv->speciality->description }}</p>
                                 </div>
                             </div>
                         </td>
@@ -97,11 +97,11 @@
                         </td>
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                {{ $rdv->consultation->duree }} min
+                                {{ $rdv->speciality->duree }} min
                             </span>
                         </td>
                         <td class="px-6 py-4 font-mono text-sm font-semibold text-gray-900 dark:text-white">
-                            {{ $rdv->consultation->price }} DH
+                            {{ $rdv->speciality->price }} DH
                         </td>
                         <td class="px-6 py-4">
                             @if($rdv->statut === 'pending')
@@ -151,8 +151,8 @@
                                 <span class="material-symbols-outlined text-6xl text-gray-300 mb-3">event_busy</span>
                                 <p class="text-gray-500 font-medium mb-2">No appointments found</p>
                                 <p class="text-sm text-gray-400 mb-4">You haven't booked any appointments yet.</p>
-                                <a href="{{ route('consultations') }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
-                                    Browse Consultations
+                                <a href="{{ route('specialities') }}" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
+                                    Browse Specialities
                                 </a>
                             </div>
                         </td>

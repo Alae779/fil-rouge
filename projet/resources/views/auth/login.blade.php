@@ -71,7 +71,7 @@
             <div class="mt-8 pt-6 border-t border-[#f0f2f4] dark:border-slate-800 text-center">
                 <p class="text-slate-500 dark:text-slate-400 text-sm">
                     Don't have an account yet?
-                    <a class="text-primary font-bold hover:underline ml-1" href="{{ route('register') }}">Create Account</a>
+                    <a class="text-primary font-bold hover:underline ml-1" href="{{ route('register_form') }}">Create Account</a>
                 </p>
             </div>
         </div>

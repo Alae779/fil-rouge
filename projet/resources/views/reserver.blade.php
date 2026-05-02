@@ -22,42 +22,42 @@
                 <div class="detail-row">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary/70">stethoscope</span>
-                        <p class="text-[#616f89] dark:text-gray-400 text-sm font-medium">Consultation Type</p>
+                        <p class="text-[#616f89] dark:text-gray-400 text-sm font-medium">Speciality</p>
                     </div>
-                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$consultation->name}}</p>
+                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$speciality->name}}</p>
                 </div>
                 <div class="detail-row">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary/70">calendar_today</span>
                         <p class="text-[#616f89] dark:text-gray-400 text-sm font-medium">Date</p>
                     </div>
-                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$consultation->date}}</p>
+                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$speciality->date}}</p>
                 </div>
                 <div class="detail-row">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary/70">schedule</span>
                         <p class="text-[#616f89] dark:text-gray-400 text-sm font-medium">Time Slot</p>
                     </div>
-                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$consultation->time}}</p>
+                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$speciality->time}}</p>
                 </div>
                 <div class="detail-row">
                     <div class="flex items-center gap-3">
                         <p class="text-[#616f89] dark:text-gray-400 text-sm font-medium">Durée</p>
                     </div>
-                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$consultation->duree}}</p>
+                    <p class="text-[#111318] dark:text-white text-sm font-semibold">{{$speciality->duree}}</p>
                 </div>
                 <div class="flex items-center justify-between py-5 mt-2 bg-primary/5 rounded-lg px-4">
                     <div class="flex items-center gap-3">
                         <span class="material-symbols-outlined text-primary">payments</span>
-                        <p class="text-[#111318] dark:text-white font-bold">Total Consultation Fee</p>
+                        <p class="text-[#111318] dark:text-white font-bold">Total Speciality Fee</p>
                     </div>
-                    <p class="text-primary text-2xl font-black">${{$consultation->price}}</p>
+                    <p class="text-primary text-2xl font-black">${{$speciality->price}}</p>
                 </div>
             </div>
 
             <!-- Actions -->
             <div class="mt-10 space-y-4">
-                <form method="POST" action="{{ route('confirm', $consultation) }}">
+                <form method="POST" action="{{ route('confirm', $speciality) }}">
                     @csrf
                     <button class="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 px-5 bg-primary hover:bg-primary/90 text-white text-lg font-bold transition-all shadow-lg shadow-primary/20" type="submit">
                         <span>Confirm Booking</span>

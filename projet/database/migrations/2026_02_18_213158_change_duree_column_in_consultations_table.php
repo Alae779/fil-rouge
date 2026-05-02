@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('consultations', function (Blueprint $table) {
+        Schema::table('specialities', function (Blueprint $table) {
             $table->integer('duree')->change();
         });
     }
 
     public function down()
     {
-        Schema::table('consultations', function (Blueprint $table) {
+        Schema::table('specialities', function (Blueprint $table) {
             $table->time('duree')->change();
         });
     }

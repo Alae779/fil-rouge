@@ -16,12 +16,12 @@ class UserController extends Controller
         if($user->role === 'admin'){
             abort(403, 'Forbidden');
         }
-        $user->update(['is_banned' => 'banned']);
+        $user->update(['is_banned' => '1']);
         return redirect()->back();
     }
     public function unban($id){
         $user = User::findOrFail($id);
-        $user->update(['is_banned' => 'active']);
+        $user->update(['is_banned' => '0']);
         return redirect()->back();
     }
     public function search(Request $request){

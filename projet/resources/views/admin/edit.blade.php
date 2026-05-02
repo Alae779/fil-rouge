@@ -6,7 +6,7 @@
     <nav class="flex items-center gap-2 text-sm text-gray-500 mb-6">
         <a class="hover:text-primary transition-colors" href="{{ url('/admin/dashboard') }}">Home</a>
         <span class="material-symbols-outlined text-xs">chevron_right</span>
-        <a class="hover:text-primary transition-colors" href="{{ url('/admin/consultations') }}">Consultations</a>
+        <a class="hover:text-primary transition-colors" href="{{ url('/admin/specialities') }}">Specialities</a>
         <span class="material-symbols-outlined text-xs">chevron_right</span>
         <span class="text-gray-900 dark:text-gray-300 font-medium">Edit</span>
     </nav>
@@ -14,13 +14,13 @@
     {{-- Page Header --}}
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-            <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-1">Edit Consultation</h1>
-            <p class="text-gray-500 dark:text-gray-400">Update the details for <span class="font-semibold text-gray-700 dark:text-gray-200">{{ $consultation->name }}</span>.</p>
+            <h1 class="text-3xl font-black text-gray-900 dark:text-white tracking-tight mb-1">Edit Seciality</h1>
+            <p class="text-gray-500 dark:text-gray-400">Update the details for <span class="font-semibold text-gray-700 dark:text-gray-200">{{ $speciality->name }}</span>.</p>
         </div>
-        <a href="{{ url('/admin/consultations') }}"
+        <a href="{{ url('/admin/specialities') }}"
             class="flex items-center gap-2 px-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
             <span class="material-symbols-outlined text-lg">arrow_back</span>
-            Back to Consultations
+            Back to Specialites
         </a>
     </div>
 
@@ -32,10 +32,10 @@
             <div class="size-9 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
                 <span class="material-symbols-outlined">stethoscope</span>
             </div>
-            <h2 class="text-lg font-bold text-gray-900 dark:text-white">Consultation Details</h2>
+            <h2 class="text-lg font-bold text-gray-900 dark:text-white">Speciality Details</h2>
         </div>
 
-        <form method="POST" action="{{ route('update_consultation', $consultation->id) }}" class="p-8">
+        <form method="POST" action="{{ route('update_speciality', $speciality->id) }}" class="p-8">
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -43,14 +43,14 @@
                 {{-- Name --}}
                 <div class="md:col-span-2">
                     <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1.5">
-                        Consultation Name <span class="text-red-500">*</span>
+                        Speciality Name <span class="text-red-500">*</span>
                     </label>
                     <div class="relative group">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary transition-colors">
                             <span class="material-symbols-outlined text-lg">title</span>
                         </div>
                         <input type="text" id="name" name="name" required
-                            value="{{ old('name', $consultation->name) }}"
+                            value="{{ old('name', $speciality->name) }}"
                             placeholder="e.g. General Checkup"
                             class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm @error('name') border-red-400 @enderror"/>
                     </div>
@@ -71,8 +71,8 @@
                             <span class="material-symbols-outlined text-lg">description</span>
                         </div>
                         <textarea id="description" name="description" required rows="3"
-                            placeholder="Briefly describe what this consultation covers..."
-                            class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm resize-none @error('description') border-red-400 @enderror">{{ old('description', $consultation->description) }}</textarea>
+                            placeholder="Briefly describe what this speciality covers..."
+                            class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm resize-none @error('description') border-red-400 @enderror">{{ old('description', $speciality->description) }}</textarea>
                     </div>
                     @error('description')
                         <p class="mt-1.5 text-xs text-red-500 flex items-center gap-1">
@@ -92,7 +92,7 @@
                         </div>
                         <input type="number" id="duree" name="duree" required
                             min="5" max="480"
-                            value="{{ old('duree', $consultation->duree) }}"
+                            value="{{ old('duree', $speciality->duree) }}"
                             placeholder="e.g. 30"
                             class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm @error('duree') border-red-400 @enderror"/>
                     </div>
@@ -114,7 +114,7 @@
                         </div>
                         <input type="number" id="price" name="price" required
                             min="0" step="0.01"
-                            value="{{ old('price', $consultation->price) }}"
+                            value="{{ old('price', $speciality->price) }}"
                             placeholder="e.g. 75.00"
                             class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm @error('price') border-red-400 @enderror"/>
                     </div>
@@ -135,7 +135,7 @@
                             <span class="material-symbols-outlined text-lg">calendar_today</span>
                         </div>
                         <input type="date" id="date" name="date" required
-                            value="{{ old('date', \Carbon\Carbon::parse($consultation->date)->format('Y-m-d')) }}"
+                            value="{{ old('date', \Carbon\Carbon::parse($speciality->date)->format('Y-m-d')) }}"
                             class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm @error('date') border-red-400 @enderror"/>
                     </div>
                     @error('date')
@@ -155,7 +155,7 @@
                             <span class="material-symbols-outlined text-lg">alarm</span>
                         </div>
                         <input type="time" id="time" name="time" required
-                            value="{{ old('time', \Carbon\Carbon::parse($consultation->time)->format('H:i')) }}"
+                            value="{{ old('time', \Carbon\Carbon::parse($speciality->time)->format('H:i')) }}"
                             class="block w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-sm @error('time') border-red-400 @enderror"/>
                     </div>
                     @error('time')
@@ -174,7 +174,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
 
                 <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-                    <a href="{{ url('/admin/consultations') }}"
+                    <a href="{{ url('/admin/specialities') }}"
                         class="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                         Cancel
                     </a>

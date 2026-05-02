@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rendezvous', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('heure');
-            $table->enum('statut', ['pending', 'accepted', 'cancelled'])->default('pending');
+            $table->decimal('amount');
             $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('speciality_id')->constrained('specialities')->onDelete('cascade');
+            $table->foreignId('rendezvous_id')->constrained('rendezvous')->onDelete('cascade');
         });
     }
 
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rendezvous');
+        Schema::dropIfExists('payments');
     }
 };
