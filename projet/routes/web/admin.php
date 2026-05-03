@@ -17,7 +17,7 @@ Route::middleware([AdminMiddleware::class])->group(function () {
         Route::get('/specialities/create', [SpecialityController::class, 'create'])->name('create_speciality');
         Route::post('/specialities/store', [SpecialityController::class, 'store'])->name('store_speciality');
         Route::get('/specialities/edit/{id}', [SpecialityController::class, 'edit'])->name('edit_speciality');
-        Route::post('/specialities/delete/{id}', [SpecialityController::class, 'delete'])->name('delete_speciality');
+        Route::delete('/specialities/delete/{id}', [SpecialityController::class, 'delete'])->name('delete_speciality');
         Route::post('/specialities/update/{id}', [SpecialityController::class, 'update'])->name('update_speciality');
     });
     Route::prefix('/users')->group(function () {

@@ -26,8 +26,8 @@ Route::middleware([ActiveMiddleware::class])->group(function () {
     Route::get('/specialities/book/success/{speciality}', [SpecialityController::class, 'bookingSuccess'])->name('booking_success');
     Route::post('/appointments/cancel/{id}', [AppointmentController::class, 'cancel_my_appointment'])->name('cancel_my_appointment');
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
+    });
     Route::get('/appointments/specify', [SpecialityController::class, 'specify'])->name('specify');
-});
 include "web/admin.php";
 
 

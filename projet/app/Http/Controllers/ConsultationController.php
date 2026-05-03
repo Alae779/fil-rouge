@@ -19,7 +19,7 @@ class ConsultationController extends Controller
         $averagePrice = Consultation::avg('price');
         return view('admin.consultation', compact('cons', 'consultations', 'averagePrice'));
     }
-    public function create(){   
+    public function create(){
         return view('admin.create');
     }
     public function store(Request $request){

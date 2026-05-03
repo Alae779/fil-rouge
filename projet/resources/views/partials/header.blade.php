@@ -83,12 +83,6 @@
         <div class="h-8 w-px bg-slate-200 dark:bg-slate-700 hidden md:block"></div>
 
         <div class="flex items-center gap-4">
-                <button class="hidden sm:flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-sm shadow-primary/20">
-                    <span class="truncate">Book Now</span>
-                </button>
-                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-100 dark:border-slate-800 bg-primary/10 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-primary">account_circle</span>
-                </div>
                 @auth
                     <a href="{{ route('logout') }}" class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all shadow-sm">
                         <span class="truncate">Log Out</span>

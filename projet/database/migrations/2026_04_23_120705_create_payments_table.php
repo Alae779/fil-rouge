@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount');
             $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('speciality_id')->constrained('specialities')->onDelete('cascade');
-            $table->foreignId('rendezvous_id')->constrained('rendezvous')->onDelete('cascade');
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities')->nullOnDelete();
+            $table->foreignId('rendezvous_id')->nullable()->constrained('rendezvous')->nullOnDelete();
         });
     }
 

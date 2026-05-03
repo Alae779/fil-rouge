@@ -57,9 +57,9 @@ class AppointmentController extends Controller
             $query->where('statut', $request->statut);
         }
         $appointments = $query->paginate(10)->withQueryString();
-
+  
         $userID = Auth::id();
-        $user = User::find(Auth::id());
+        $user = User::find($userID);
         if($user->role === 'admin'){
             return view('admin.appointment', compact('appointments'));
         }

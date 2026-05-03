@@ -17,7 +17,7 @@ return new class extends Migration
             $table->time('heure');
             $table->enum('statut', ['pending', 'accepted', 'cancelled'])->default('pending');
             $table->foreignId('patient_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('speciality_id')->constrained('specialities')->onDelete('cascade');
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities')->nullOnDelete();
         });
     }
 

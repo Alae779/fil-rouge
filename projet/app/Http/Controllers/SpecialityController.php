@@ -41,8 +41,7 @@ class SpecialityController extends Controller
     }
     public function delete($id){
         $speciality = Speciality::destroy($id);
-        $specialities = Speciality::all();
-        return view('admin.speciality', compact('specialities'));
+        return redirect()->back();
     }
     public function reserver($id){
         $speciality = Speciality::find($id);

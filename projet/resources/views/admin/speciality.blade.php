@@ -89,9 +89,11 @@
                                 <a href="{{ route('edit_speciality', $speciality->id) }}" class="p-1.5 text-gray-400 hover:text-primary transition-colors" title="Edit">
                                     <span class="material-symbols-outlined text-lg">edit</span>
                                 </a>
-                                <a href="{{ route('delete_speciality', $speciality->id) }}" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" title="Delete">
-                                    <span class="material-symbols-outlined text-lg">delete</span>
-                                </a>
+                                <form action="{{ route('delete_speciality', $speciality->id) }}" method="POST" class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" title="Delete">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="material-symbols-outlined text-lg">delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
