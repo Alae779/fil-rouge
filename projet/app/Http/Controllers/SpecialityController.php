@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSpecialisationRequest;
+use App\Http\Requests\UpdateSpecialisationRequest;
 use App\Models\Speciality;
 use App\Models\Rendezvous;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +24,8 @@ class SpecialityController extends Controller
     public function create(){   
         return view('admin.create');
     }
-    public function store(Request $request){
-        Speciality::create($request->all());
+    public function store(StoreSpecialisationRequest $request){
+        Speciality::create($request->validated());
         $specialities = Speciality::all();
         return redirect()->back();
     }
@@ -31,9 +33,9 @@ class SpecialityController extends Controller
         $speciality = Speciality::findOrFail($id);
         return view('admin.edit', compact('speciality'));
     }
-    public function update($id){
+    public function update($id, UpdateSpecialisationRequest $request){
         $speciality = Speciality::findOrFail($id);
-        $speciality->update(request()->all());
+        $speciality->update($request->validated());
         $specialities = Speciality::paginate(10);
         $specs = Speciality::all();
         $averagePrice = Speciality::avg('price');
